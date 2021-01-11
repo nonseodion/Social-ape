@@ -8,9 +8,12 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import AppIcon from "../images/ape.png";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Proptypes from "prop-types";
+
+//REdux stuffs
+import { signInUser } from "../redux/actions/userActions";
+import { connect } from "react-redux";
 
 const styles = {
   form: {
@@ -42,6 +45,12 @@ class signin extends Component {
     errors: {},
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors });
+    }
+  }
+
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -53,14 +62,16 @@ class signin extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    
-    
-    
+
+    this.props.signInUser(userData, this.props.history);
   };
 
   render() {
-    const { classes } = this.props;
-    const { errors, loading } = this.state;
+    const {
+      classes,
+      UI: { loading },
+    } = this.props;
+    const { errors } = this.state;
 
     return (
       <Grid container className={classes.form}>
@@ -127,6 +138,21 @@ class signin extends Component {
 
 signin.propTypes = {
   classes: Proptypes.object.isRequired,
+  UI: Proptypes.object.isRequired,
+  user: Proptypes.object.isRequired,
+  signInUser: Proptypes.func.isRequired,
 };
 
-export default withStyles(styles)(signin);
+const mapStateToProps = (state) => ({
+  UI: state.UI,
+  user: state.user,
+});
+
+const mapActionsToProps = {
+  signInUser,
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(withStyles(styles)(signin));

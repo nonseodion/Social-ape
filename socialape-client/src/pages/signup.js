@@ -8,9 +8,12 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import AppIcon from "../images/ape.png";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import Proptypes from "prop-types";
+
+//Redux stuffs
+import { connect } from "react-redux";
+import { signUpUser } from "../redux/actions/userActions";
 
 const styles = {
   form: {
@@ -45,6 +48,12 @@ class Signup extends Component {
     loading: false,
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.UI.errors) {
+      this.setState({ errors: nextProps.UI.errors });
+    }
+  }
+
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -60,23 +69,15 @@ class Signup extends Component {
     };
     this.setState({ loading: true });
 
-    axios
-      .post("/signup", newUserData)
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        this.setState({ loading: false });
-        this.props.history.push("/");
-      })
-      .catch((err) => {
-        console.error(err);
-        this.setState({ errors: err.response.data, loading: false });
-      });
+    this.props.signUpUser(newUserData, this.props.history);
   };
 
   render() {
-    const { classes } = this.props;
-    const { errors, loading } = this.state;
+    const {
+      classes,
+      UI: { loading },
+    } = this.props;
+    const { errors } = this.state;
 
     return (
       <Grid container className={classes.form}>
@@ -165,6 +166,16 @@ class Signup extends Component {
 
 Signup.propTypes = {
   classes: Proptypes.object.isRequired,
+  UI: Proptypes.object.isRequired,
+  user: Proptypes.object.isRequired,
+  signUpUser: Proptypes.func.isRequired,
 };
 
-export default withStyles(styles)(Signup);
+const mapStateToProps = (state) => ({
+  UI: state.UI,
+  user: state.user,
+});
+
+export default connect(mapStateToProps, { signUpUser })(
+  withStyles(styles)(Signup)
+);

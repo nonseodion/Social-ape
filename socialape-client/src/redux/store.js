@@ -1,10 +1,5 @@
-import {
-  createStore,
-  applyMiddleware,
-  compose,
-  combineReducers,
-} from "react-redux";
-import { thunk } from "react-thunk";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import thunk from "redux-thunk";
 
 import userReducer from "./reducers/userReducer";
 import dataReducer from "./reducers/dataReducer";
