@@ -2203,3 +2203,12 @@ INFO: Detected non-HTTP/2 connection.
 [info] i  functions: Finished "api" in ~1s {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"Finished \"api\" in ~1s"}}
 [debug] [2021-01-11T12:48:03.143Z] [worker-api-140017d6-e3cd-4566-b4c3-ffaefa12ff01]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-140017d6-e3cd-4566-b4c3-ffaefa12ff01]: IDLE"}}
 [debug] [2021-01-11T12:48:03.143Z] [work-queue] {"queueLength":0,"workRunningCount":0}
+[debug] [2021-01-11T12:48:25.859Z] Jan 11, 2021 1:48:25 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 11, 2021 1:48:25 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2021-01-11T12:49:42.926Z] Jan 11, 2021 1:49:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 11, 2021 1:49:42 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2021-01-11T12:50:59.716Z] Jan 11, 2021 1:50:59 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jan 11, 2021 1:50:59 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
