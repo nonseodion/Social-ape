@@ -11,6 +11,10 @@ import {
 } from "@material-ui/core/styles";
 import themeFile from "./utils/theme";
 
+//Redux
+import store from "./redux/store";
+import { Provider } from "react-redux";
+
 //pages
 import Home from "./pages/home";
 import Signup from "./pages/signup";
@@ -33,28 +37,30 @@ if (token) {
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <div className="App">
-        <Router>
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <AuthRoute
-                path="/signup"
-                authenticated={authenticated}
-                exact
-                component={Signup}
-              />
-              <AuthRoute
-                path="/signin"
-                authenticated={authenticated}
-                exact
-                component={Signin}
-              />
-              <Route path="/" exact component={Home} />
-            </Switch>
-          </div>
-        </Router>
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          <Router>
+            <Navbar />
+            <div className="container">
+              <Switch>
+                <AuthRoute
+                  path="/signup"
+                  authenticated={authenticated}
+                  exact
+                  component={Signup}
+                />
+                <AuthRoute
+                  path="/signin"
+                  authenticated={authenticated}
+                  exact
+                  component={Signin}
+                />
+                <Route path="/" exact component={Home} />
+              </Switch>
+            </div>
+          </Router>
+        </div>
+      </Provider>
     </MuiThemeProvider>
   );
 }

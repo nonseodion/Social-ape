@@ -40,7 +40,6 @@ class signin extends Component {
     email: "",
     password: "",
     errors: {},
-    loading: false,
   };
 
   handleChange = (event) => {
@@ -54,20 +53,9 @@ class signin extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    this.setState({ loading: true });
-
-    axios
-      .post("/signin", userData)
-      .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("FBIdToken", `Bearer ${res.data.token}`);
-        this.setState({ loading: false });
-        this.props.history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({ errors: err.response.data, loading: false });
-      });
+    
+    
+    
   };
 
   render() {
