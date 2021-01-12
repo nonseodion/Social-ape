@@ -1,4 +1,9 @@
-import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED } from "../types";
+import {
+  SET_USER,
+  SET_AUTHENTICATED,
+  SET_UNAUTHENTICATED,
+  LOADING_USER,
+} from "../types";
 
 const initialState = {
   authenticated: false,
@@ -6,6 +11,7 @@ const initialState = {
   likes: [],
   notifications: [],
   comments: [],
+  loading: false,
 };
 
 function userReducer(state = initialState, action) {
@@ -23,6 +29,12 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         authenticated: true,
+        loading: false,
+      };
+    case LOADING_USER:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

@@ -7,7 +7,7 @@ import axios from "axios";
 
 //MUI stuff
 import {
-  createMuiTheme,
+  unstable_createMuiStrictModeTheme as createMuiTheme,
   ThemeProvider as MuiThemeProvider,
 } from "@material-ui/core/styles";
 import themeFile from "./utils/theme";
