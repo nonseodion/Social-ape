@@ -1,28 +1,63 @@
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Proptypes from "prop-types";
+import MyButton from "../utils/MyButton";
+
+//MUI stuffs
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Home, Notifications, Add } from "@material-ui/icons";
 
-import React, { Component } from "react";
+//Redux stuff
+import { connect } from "react-redux";
 
 class Navbar extends Component {
   render() {
+    const { authenticated } = this.props;
+
+    const navBarIcons = authenticated ? (
+      <>
+        <MyButton tip="Add a Scream">
+          <Add />
+        </MyButton>
+        <Link to="/">
+          <MyButton tip="Home">
+            <Home />
+          </MyButton>
+        </Link>
+        <MyButton tip="Notifications">
+          <Notifications />
+        </MyButton>
+      </>
+    ) : (
+      <>
+        <Button component={Link} to="/" color="inherit">
+          Home
+        </Button>
+        <Button component={Link} to="/signup" color="inherit">
+          Signup
+        </Button>
+        <Button component={Link} to="/signin" color="inherit">
+          Signin
+        </Button>
+      </>
+    );
+
     return (
       <AppBar position="fixed">
-        <Toolbar className="nav-container">
-          <Button component={Link} to="/" color="inherit">
-            Home
-          </Button>
-          <Button component={Link} to="/signup" color="inherit">
-            Signup
-          </Button>
-          <Button component={Link} to="/signin" color="inherit">
-            Signin
-          </Button>
-        </Toolbar>
+        <Toolbar className="nav-container">{navBarIcons}</Toolbar>
       </AppBar>
     );
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  authenticated: Proptypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authenticated: state.user.authenticated,
+});
+
+export default connect(mapStateToProps)(Navbar);
