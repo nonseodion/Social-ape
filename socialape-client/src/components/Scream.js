@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Proptypes from "prop-types";
 import MyButton from "../utils/MyButton";
+import DeleteScream from "../components/DeleteScream";
 
 // MUI stuff
 import { Card, CardContent, CardMedia, Typography } from "@material-ui/core";
@@ -61,6 +62,7 @@ class Scream extends Component {
         likeCount,
         userHandle,
         commentCount,
+        screamId,
       },
       authenticated,
     } = this.props;
@@ -76,7 +78,7 @@ class Scream extends Component {
         <Favorite color="primary" />
       </MyButton>
     ) : (
-      <MyButton tip="Like" handleClick={this.handleUnLikeScream}>
+      <MyButton tip="Like" handleClick={this.handleLikeScream}>
         <FavoriteBorder color="primary" />
       </MyButton>
     );
@@ -102,6 +104,7 @@ class Scream extends Component {
             <Chat color="primary" />
           </MyButton>
           <span>{commentCount} Comments</span>
+          <DeleteScream screamId={screamId} />
         </CardContent>
       </Card>
     );
