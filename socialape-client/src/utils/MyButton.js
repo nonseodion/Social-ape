@@ -10,7 +10,7 @@ export default function MyButton({
   children,
 }) {
   return (
-    <Tooltip title={tip} className={tipClassName}>
+    <Tooltip title={tip} className={tipClassName} placement="top">
       <IconButton className={btnClassName} onClick={handleClick}>
         {children}
       </IconButton>
