@@ -14,7 +14,9 @@ class Home extends Component {
   }
 
   render() {
-    const { screams } = this.props;
+    const {
+      data: { screams },
+    } = this.props;
 
     const screamsMarkup = screams ? (
       screams.map((scream, index) => (
@@ -38,7 +40,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  screams: state.data.screams,
+  data: state.data,
 });
 
 const mapActionsToProps = {
@@ -46,7 +48,7 @@ const mapActionsToProps = {
 };
 
 Home.propTypes = {
-  screams: Proptypes.array.isRequired,
+  data: Proptypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Home);

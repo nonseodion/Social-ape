@@ -4,6 +4,7 @@ import {
   SET_SCREAMS,
   SET_SCREAM,
   LOADING_DATA,
+  DELETE_SCREAM,
 } from "../types";
 
 const initialState = {
@@ -11,6 +12,8 @@ const initialState = {
   scream: {},
   loading: false,
 };
+
+let newScreams;
 
 const dataReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,8 +26,18 @@ const dataReducer = (state = initialState, action) => {
       const index = state.screams.findIndex(
         (scream) => scream.screamId === action.payload.screamId
       );
-      const newScreams = [...state.screams];
+      newScreams = [...state.screams];
       newScreams[index] = action.payload;
+      state.screams = newScreams;
+      return {
+        ...state,
+      };
+    case DELETE_SCREAM:
+      newScreams = [...state.screams];
+      console.log(newScreams);
+      newScreams = newScreams.filter(
+        (scream) => scream.screamId !== action.payload
+      );
       state.screams = newScreams;
       return {
         ...state,

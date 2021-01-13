@@ -22,6 +22,7 @@ const styles = {
   card: {
     display: "flex",
     marginBottom: 20,
+    position: "relative",
   },
   content: {
     padding: 25,
@@ -65,6 +66,7 @@ class Scream extends Component {
         screamId,
       },
       authenticated,
+      handle,
     } = this.props;
 
     const likeButton = !authenticated ? (
@@ -91,6 +93,9 @@ class Scream extends Component {
           title="Profile picture"
         ></CardMedia>
         <CardContent className={classes.content}>
+          {authenticated && userHandle === handle ? (
+            <DeleteScream screamId={screamId} />
+          ) : null}
           <Typography variant="h5" component={Link} to={`/users/${userHandle}`}>
             {userHandle}
           </Typography>
@@ -104,7 +109,6 @@ class Scream extends Component {
             <Chat color="primary" />
           </MyButton>
           <span>{commentCount} Comments</span>
-          <DeleteScream screamId={screamId} />
         </CardContent>
       </Card>
     );
@@ -119,6 +123,7 @@ Scream.propTypes = {
 const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated,
   likes: state.user.likes,
+  handle: state.user.credentials.handle,
 });
 
 const mapActionsToProps = {
