@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Proptypes from "prop-types";
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 
 //Redux stuff
-import { deleteScream } from "../redux/actions/dataActions";
+import { deleteScream } from "../../redux/actions/dataActions";
 import { useDispatch } from "react-redux";
 
 //MUI stuff

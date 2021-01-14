@@ -8,12 +8,12 @@ import {
   Edit,
   KeyboardReturn,
 } from "@material-ui/icons";
-import { uploadImage, logOutUser } from "../redux/actions/userActions";
+import { uploadImage, logOutUser } from "../../redux/actions/userActions";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
 
 import EditDetails from "./EditDetails";
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 
 import PropTypes from "prop-types";
 

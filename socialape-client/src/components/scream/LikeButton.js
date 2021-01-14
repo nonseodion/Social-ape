@@ -2,9 +2,9 @@ import React from "react";
 import Proptypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Favorite, FavoriteBorder } from "@material-ui/icons";
-import { likeScream, unLikeScream } from "../redux/actions/dataActions";
+import { likeScream, unLikeScream } from "../../redux/actions/dataActions";
 import { Link } from "react-router-dom";
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 
 export default function LikeButton({ screamId }) {
   const dispatch = useDispatch();

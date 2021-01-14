@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Proptypes from "prop-types";
-import MyButton from "../utils/MyButton";
-import DeleteScream from "../components/DeleteScream";
+import MyButton from "../../utils/MyButton";
+import DeleteScream from "./DeleteScream";
 import ScreamDialog from "./ScreamDialog";
 import LikeButton from "./LikeButton";
 

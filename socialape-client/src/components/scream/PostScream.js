@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Proptypes from "prop-types";
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 
 //Redux stuff
 import { connect } from "react-redux";
-import { postScream, clearErrors } from "../redux/actions/dataActions";
+import { postScream, clearErrors } from "../../redux/actions/dataActions";
 
 //MUI stuff
 import { withStyles } from "@material-ui/core/styles";

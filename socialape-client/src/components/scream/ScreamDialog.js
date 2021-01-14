@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Proptypes from "prop-types";
-import MyButton from "../utils/MyButton";
+import MyButton from "../../utils/MyButton";
 import LikeButton from "./LikeButton";
 import dayjs from "dayjs";
+import Comments from "./Comments";
 
 //Redux stuff
 import { connect } from "react-redux";
-import { getScream } from "../redux/actions/dataActions";
+import { getScream } from "../../redux/actions/dataActions";
 
 //MUI stuff
 import { withStyles } from "@material-ui/core/styles";
@@ -113,6 +114,7 @@ class ScreamDialog extends Component {
           </MyButton>
           <span>{commentCount} Comments</span>
         </Grid>
+        {/* <Comments /> */}
       </Grid>
     );
 
