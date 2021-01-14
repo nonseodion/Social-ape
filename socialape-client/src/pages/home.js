@@ -49,6 +49,7 @@ const mapActionsToProps = {
 
 Home.propTypes = {
   data: Proptypes.object.isRequired,
+  getScreams: Proptypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Home);

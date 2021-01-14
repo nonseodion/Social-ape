@@ -48,7 +48,7 @@ exports.getAllScreams = (req, res) => {
 exports.getScream = (req, res) => {
   let screamData = {};
   console.log(req.params.screamId);
-  db.doc(`Screams/${req.params.screamId}`)
+  db.doc(`screams/${req.params.screamId}`)
     .get()
     .then((doc) => {
       if (!doc.exists) {
@@ -64,6 +64,7 @@ exports.getScream = (req, res) => {
     })
     .then((docs) => {
       screamData.comments = [];
+      console.log(screamData);
       docs.forEach((doc) => {
         screamData.comments.push(doc.data());
       });

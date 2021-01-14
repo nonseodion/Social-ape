@@ -37,6 +37,9 @@ const dataReducer = (state = initialState, action) => {
       newScreams = [...state.screams];
       newScreams[index] = action.payload;
       state.screams = newScreams;
+      if (state.scream.screamId === action.payload.screamId) {
+        state.scream = action.payload;
+      }
       return {
         ...state,
       };
