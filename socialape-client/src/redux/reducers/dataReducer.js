@@ -5,6 +5,7 @@ import {
   SET_SCREAM,
   LOADING_DATA,
   DELETE_SCREAM,
+  POST_SCREAM,
 } from "../types";
 
 const initialState = {
@@ -19,6 +20,13 @@ const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SCREAMS:
       return { ...state, screams: action.payload, loading: false };
+    case SET_SCREAM:
+      return { ...state, scream: action.payload };
+    case POST_SCREAM:
+      return {
+        ...state,
+        screams: [action.payload.newScream, ...state.screams],
+      };
     case LOADING_DATA:
       return { ...state, loading: true };
     case LIKE_SCREAM:
@@ -34,7 +42,6 @@ const dataReducer = (state = initialState, action) => {
       };
     case DELETE_SCREAM:
       newScreams = [...state.screams];
-      console.log(newScreams);
       newScreams = newScreams.filter(
         (scream) => scream.screamId !== action.payload
       );

@@ -1,6 +1,12 @@
 const { db } = require("../utils/admin");
+const { validatePostScreamData } = require("../utils/validators");
 
 exports.postScream = (req, res) => {
+  const { isValid, errors } = validatePostScreamData(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const newScream = {
     ...req.body,
     createdAt: new Date().toISOString(),
@@ -13,7 +19,8 @@ exports.postScream = (req, res) => {
   db.collection("screams")
     .add(newScream)
     .then((doc) => {
-      return res.json({ message: `document ${doc.id} created successfully` });
+      newScream.screamId = doc.id;
+      return res.json({ newScream });
     })
     .catch((err) => {
       res.status(500).json({ error: "something went wrong" });

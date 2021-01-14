@@ -7,6 +7,7 @@ export const LOADING_USER = "LOADING_USER";
 export const SET_ERRORS = "SET_ERRORS";
 export const LOADING_UI = "LOADING_UI";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const STOP_LOADING_UI = "STOP_LOADING_UI";
 //Data types
 export const SET_SCREAMS = "SET_SCREAMS";
 export const SET_SCREAM = "SET_SCREAM";
@@ -14,3 +15,4 @@ export const LIKE_SCREAM = "LIKE_SCREAM";
 export const UNLIKE_SCREAM = "UNLIKE_SCREAM";
 export const LOADING_DATA = "LOADING_DATA";
 export const DELETE_SCREAM = "DELETE_SCREAM";
+export const POST_SCREAM = "POST_SCREAM";

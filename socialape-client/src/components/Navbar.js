@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Proptypes from "prop-types";
 import MyButton from "../utils/MyButton";
+import PostScream from "../components/PostScream";
 
 //MUI stuffs
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import { Home, Notifications, Add } from "@material-ui/icons";
+import { Home, Notifications } from "@material-ui/icons";
 
 //Redux stuff
 import { connect } from "react-redux";
@@ -18,9 +19,7 @@ class Navbar extends Component {
 
     const navBarIcons = authenticated ? (
       <>
-        <MyButton tip="Add a Scream">
-          <Add />
-        </MyButton>
+        <PostScream />
         <Link to="/">
           <MyButton tip="Home">
             <Home />
