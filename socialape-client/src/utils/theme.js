@@ -13,6 +13,17 @@ const theme = {
       contrastText: "#fff",
     },
   },
+  others: {
+    invisibleSeparator: {
+      border: "none",
+      margin: 4,
+    },
+    visibleSeparator: {
+      marginBottom: 20,
+      width: "100%",
+      borderBottom: "1px solid rgba(0,0,0,0.1)",
+    },
+  },
 };
 
 export default theme;

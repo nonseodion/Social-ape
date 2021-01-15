@@ -52,12 +52,17 @@ const logOutUser = () => (dispatch) => {
 
 const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
-  axios.get("/user").then((res) => {
-    dispatch({
-      type: SET_USER,
-      payload: res.data,
+  axios
+    .get("/user")
+    .then((res) => {
+      dispatch({
+        type: SET_USER,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 };
 
 const uploadImage = (formData) => (dispatch) => {

@@ -82,6 +82,8 @@ exports.commentOnScream = (req, res) => {
     return res.status(400).json({ comment: "Must not be empty" });
   }
 
+  const screamDocument = db.doc(`screams/${req.params.screamId}`);
+
   const commentData = {
     screamId: req.params.screamId,
     userHandle: req.user.handle,
@@ -90,8 +92,20 @@ exports.commentOnScream = (req, res) => {
     imageUrl: req.user.imageUrl,
   };
 
-  db.collection("comments")
-    .add(commentData)
+  screamDocument
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        screamData = doc.data();
+        return db.collection("comments").add(commentData);
+      } else {
+        return res.status(403).json("Scream does not exist");
+      }
+    })
+    .then(() => {
+      ++screamData.commentCount;
+      return screamDocument.update({ commentCount: screamData.commentCount });
+    })
     .then(() => {
       return res.json(commentData);
     })

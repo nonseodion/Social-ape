@@ -21,11 +21,8 @@ import {
 } from "@material-ui/core";
 import { UnfoldMore, Close, Chat } from "@material-ui/icons";
 
-const styles = {
-  separator: {
-    border: "none",
-    margin: 4,
-  },
+const styles = (theme) => ({
+  ...theme.others,
   profileImage: {
     maxWidth: 200,
     height: 200,
@@ -48,7 +45,7 @@ const styles = {
     marginBottom: 50,
     textAlign: "center",
   },
-};
+});
 
 class ScreamDialog extends Component {
   state = {
@@ -75,6 +72,7 @@ class ScreamDialog extends Component {
         likeCount,
         createdAt,
         userHandle,
+        comments,
       },
       screamId,
     } = this.props;
@@ -84,7 +82,7 @@ class ScreamDialog extends Component {
         <CircularProgress size={200} thickness={2} />
       </div>
     ) : (
-      <Grid spacing={10} container>
+      <Grid container>
         <Grid item sm={5}>
           <img
             alt="profile"
@@ -101,11 +99,11 @@ class ScreamDialog extends Component {
           >
             @{userHandle}
           </Typography>
-          <hr className={classes.separator} />
+          <hr className={classes.invisibleSeparator} />
           <Typography variant="body2" color="textSecondary">
             {dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
           </Typography>
-          <hr className={classes.separator} />
+          <hr className={classes.invisibleSeparator} />
           <Typography variant="body1">{body}</Typography>
           <LikeButton screamId={screamId} />
           <span>{likeCount} likes</span>
@@ -114,7 +112,7 @@ class ScreamDialog extends Component {
           </MyButton>
           <span>{commentCount} Comments</span>
         </Grid>
-        {/* <Comments /> */}
+        <Comments comments={comments} />
       </Grid>
     );
 
