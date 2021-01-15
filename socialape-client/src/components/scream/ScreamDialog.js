@@ -4,10 +4,11 @@ import MyButton from "../../utils/MyButton";
 import LikeButton from "./LikeButton";
 import dayjs from "dayjs";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 //Redux stuff
 import { connect } from "react-redux";
-import { getScream } from "../../redux/actions/dataActions";
+import { getScream, clearErrors } from "../../redux/actions/dataActions";
 
 //MUI stuff
 import { withStyles } from "@material-ui/core/styles";
@@ -59,6 +60,7 @@ class ScreamDialog extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    clearErrors();
   };
 
   render() {
@@ -112,6 +114,7 @@ class ScreamDialog extends Component {
           </MyButton>
           <span>{commentCount} Comments</span>
         </Grid>
+        <CommentForm screamId={screamId} />
         <Comments comments={comments} />
       </Grid>
     );
@@ -162,6 +165,7 @@ const mapStateToProps = (state) => ({
 
 const mapActionsToProps = {
   getScream,
+  clearErrors,
 };
 
 export default connect(

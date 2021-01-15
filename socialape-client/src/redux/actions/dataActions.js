@@ -10,6 +10,7 @@ import {
   POST_SCREAM,
   CLEAR_ERRORS,
   STOP_LOADING_UI,
+  SUBMIT_COMMENT,
 } from "../types";
 import axios from "axios";
 
@@ -111,6 +112,33 @@ const getScream = (screamId) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+const submitComment = (screamId, comment) => (dispatch) => {
+  axios
+    .post(`/scream/${screamId}/comment`, { body: comment })
+    .then((res) => {
+      dispatch({ type: SUBMIT_COMMENT, payload: res.data });
+      dispatch({ type: CLEAR_ERRORS });
+    })
+    .catch((err) => dispatch({ type: SET_ERRORS, payload: err.response.data }));
+};
+
+const getUserData = (userHandle) => (dispatch) => {
+  axios
+    .get(`/user/${userHandle}`)
+    .then((res) => {
+      dispatch({
+        type: SET_SCREAMS,
+        payload: res.data.screams,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: SET_SCREAMS,
+        payload: [],
+      });
+    });
+};
+
 export {
   likeScream,
   unLikeScream,
@@ -119,4 +147,6 @@ export {
   postScream,
   clearErrors,
   getScream,
+  submitComment,
+  getUserData,
 };
