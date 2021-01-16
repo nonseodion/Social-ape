@@ -20,6 +20,7 @@ import { Provider } from "react-redux";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
 import Signin from "./pages/signin";
+import User from "./pages/user";
 
 //Redux stuffs
 import { SET_UNAUTHENTICATED } from "./redux/types";
@@ -52,6 +53,7 @@ function App() {
                 <AuthRoute path="/signup" exact component={Signup} />
                 <AuthRoute path="/signin" exact component={Signin} />
                 <Route path="/" exact component={Home} />
+                <Route path="/users/:handle" exact component={User} />
               </Switch>
             </div>
           </Router>

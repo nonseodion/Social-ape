@@ -11,14 +11,12 @@ import { getUserData } from "../redux/actions/dataActions";
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = {};
-
-function User({ classes }) {
+function User() {
   const { handle } = useParams();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.data.loading);
   const screams = useSelector((state) => state.data.screams);
-  const { profile, setProfile } = useState(null);
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     if (profile === null) {
@@ -43,19 +41,19 @@ function User({ classes }) {
   );
 
   return (
-    <Grid container>
+    <Grid container spacing={10}>
       <Grid item sm={8} xs={12}>
         {screamsMarkup}
       </Grid>
       <Grid item sm={4} xs={12}>
-        <StaticProfile profile={profile} />
+        {profile === null ? (
+          <p> Loading profile...</p>
+        ) : (
+          <StaticProfile profile={profile} />
+        )}
       </Grid>
     </Grid>
   );
 }
 
-User.propTypes = {
-  classes: Proptypes.object.isRequired,
-};
-
-export default withStyles(styles)(User);
+export default User;
