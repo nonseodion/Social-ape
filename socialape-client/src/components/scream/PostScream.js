@@ -41,17 +41,23 @@ class PostScream extends Component {
     errors: {},
     body: "",
     open: false,
+    length: 0,
   };
 
   static getDerivedStateFromProps(nextProps, state) {
+    const stateChange = {};
     if (nextProps.UI.errors) {
-      return { errors: nextProps.UI.errors };
+      stateChange.errors = nextProps.UI.errors;
     }
-    return null;
+    if (state.length < nextProps.screamsLength) {
+      stateChange.open = false;
+    }
+    stateChange.length = nextProps.screamsLength;
+    return Object.keys(stateChange).length > 0 ? stateChange : null;
   }
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({ open: true, length: this.props.screamsLength });
   };
 
   handleClose = () => {
@@ -143,6 +149,7 @@ PostScream.propTypes = {
 
 const mapStateToProps = (state) => ({
   UI: state.UI,
+  screamsLength: state.data.screams.length,
 });
 
 const mapActionsToProps = {

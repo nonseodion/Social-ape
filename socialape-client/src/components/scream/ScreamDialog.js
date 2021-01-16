@@ -70,7 +70,7 @@ class ScreamDialog extends Component {
     const newPath = `/users/${userHandle}/screams/${screamId}`;
 
     window.history.pushState(null, null, newPath);
-    console.log(oldPath, newPath);
+
     this.setState({ open: true, newPath, oldPath });
     this.props.getScream(this.props.screamId);
   };
