@@ -51,14 +51,36 @@ const styles = (theme) => ({
 class ScreamDialog extends Component {
   state = {
     open: false,
+    newPath: null,
+    oldPath: null,
   };
 
+  componentDidMount() {
+    if (this.props.openDialog) {
+      this.handleOpen();
+    }
+  }
+
   handleOpen = () => {
-    this.setState({ open: true });
+    const {
+      scream: { userHandle },
+      screamId,
+    } = this.props;
+    const oldPath = window.history.location;
+    const newPath = `/users/${userHandle}/screams/${screamId}`;
+
+    window.history.pushState(null, null, newPath);
+    console.log(oldPath, newPath);
+    this.setState({ open: true, newPath, oldPath });
     this.props.getScream(this.props.screamId);
   };
 
   handleClose = () => {
+    const oldPath = !this.state.oldPath
+      ? `/users/${this.props.scream.userHandle}`
+      : this.state.oldPath;
+    //console.log(oldPath, this.state.oldPath);
+    window.history.pushState(null, null, oldPath);
     this.setState({ open: false });
     clearErrors();
   };
@@ -156,6 +178,7 @@ ScreamDialog.propTypes = {
   getScream: Proptypes.func.isRequired,
   classes: Proptypes.object.isRequired,
   screamId: Proptypes.string.isRequired,
+  openDialog: Proptypes.string,
 };
 
 const mapStateToProps = (state) => ({

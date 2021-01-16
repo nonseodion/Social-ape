@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 
 import EditDetails from "./EditDetails";
 import MyButton from "../../utils/MyButton";
+import ProfileSkeleton from "../../utils/ProfileSkeleton";
 
 import PropTypes from "prop-types";
 
@@ -52,7 +53,7 @@ class Profile extends Component {
     } = this.props;
 
     let ProfileMarkup = loading ? (
-      <p>Loading...</p>
+      <ProfileSkeleton />
     ) : authenticated ? (
       <Paper className={classes.Paper}>
         <div className={classes.profile}>

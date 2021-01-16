@@ -5,6 +5,7 @@ import {
   LOADING_USER,
   LIKE_SCREAM,
   UNLIKE_SCREAM,
+  MARK_NOTIFICATIONS_READ,
 } from "../types";
 
 const initialState = {
@@ -57,6 +58,15 @@ function userReducer(state = initialState, action) {
             (like) => like.screamId !== action.payload.screamId
           ),
         ],
+      };
+    case MARK_NOTIFICATIONS_READ:
+      const notifications = state.notifications.map((not) => {
+        if (!not.read) not.read = true;
+        return not;
+      });
+      return {
+        ...state,
+        notifications,
       };
     default:
       return state;

@@ -3,6 +3,7 @@ import { Grid } from "@material-ui/core";
 import Scream from "../components/scream/Scream";
 import Profile from "../components/profile/Profile";
 import Proptypes from "prop-types";
+import ScreamSkeleton from "../utils/ScreamSkeleton";
 
 //Redux stuff
 import { connect } from "react-redux";
@@ -15,15 +16,15 @@ class Home extends Component {
 
   render() {
     const {
-      data: { screams },
+      data: { screams, loading },
     } = this.props;
 
-    const screamsMarkup = screams ? (
+    const screamsMarkup = !loading ? (
       screams.map((scream, index) => (
         <Scream key={scream.screamId} scream={scream} />
       ))
     ) : (
-      <p>Loading...</p>
+      <ScreamSkeleton />
     );
 
     return (

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Proptypes from "prop-types";
 import StaticProfile from "../components/profile/StaticProfile";
 import { useParams } from "react-router-dom";
 import Scream from "../components/scream/Scream";
 import axios from "axios";
+import ScreamSkeleton from "../utils/ProfileSkeleton";
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getUserData } from "../redux/actions/dataActions";
 //MUI
 import { Grid } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
 
 function User() {
-  const { handle } = useParams();
+  const { handle, screamId } = useParams();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.data.loading);
   const screams = useSelector((state) => state.data.screams);
@@ -30,15 +29,22 @@ function User() {
     }
   });
 
-  const screamsMarkup = loading ? (
-    <p>Loading Data...</p>
-  ) : screams === null ? (
-    <p>No Screams from this user</p>
-  ) : (
-    screams.map((scream, index) => (
-      <Scream key={scream.screamId} scream={scream} />
-    ))
-  );
+  let screamsMarkup;
+  if (loading) {
+    screamsMarkup = <p>Loading Data...</p>;
+  } else if (screams === null) {
+    screamsMarkup = <p>No Screams from this user</p>;
+  } else {
+    if (!screamId) {
+      screamsMarkup = screams.map((scream, index) => (
+        <Scream key={scream.screamId} scream={scream} />
+      ));
+    } else {
+      screamsMarkup = screams.map((scream, index) => (
+        <Scream key={scream.screamId} scream={scream} openDialog={screamId} />
+      ));
+    }
+  }
 
   return (
     <Grid container spacing={10}>
@@ -47,7 +53,7 @@ function User() {
       </Grid>
       <Grid item sm={4} xs={12}>
         {profile === null ? (
-          <p> Loading profile...</p>
+          <ScreamSkeleton />
         ) : (
           <StaticProfile profile={profile} />
         )}
