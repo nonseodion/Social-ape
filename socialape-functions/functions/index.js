@@ -21,6 +21,8 @@ const {
 const FBAuth = require("./utils/fbAuth");
 
 const { db } = require("./utils/admin");
+const cors = require("cors");
+app.use(cors());
 
 // Scream routes
 app.post("/scream", FBAuth, postScream);
