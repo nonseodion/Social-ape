@@ -52,33 +52,32 @@ class Notifications extends Component {
     dayjs.extend(relativeTime);
 
     let notificationItems;
-    notifications && notifications.length > 0 ? (
-      (notificationItems = notifications.map((not) => {
-        const notColor = not.read ? "primary" : "secondary";
-        const time = dayjs(not.createdAt).fromNow();
-        const verb = not.type === "like" ? "liked" : "commented on";
-        const notIcon =
-          not.type === "like" ? (
-            <Favorite color={notColor} style={{ marginRight: 10 }} />
-          ) : (
-            <Chat color={notColor} style={{ marginRight: 10 }} />
+    console.log(notifications);
+    notifications && notifications.length > 0
+      ? (notificationItems = notifications.map((not) => {
+          const notColor = not.read ? "primary" : "secondary";
+          const time = dayjs(not.createdAt).fromNow();
+          const verb = not.type === "like" ? "liked" : "commented on";
+          const notIcon =
+            not.type === "like" ? (
+              <Favorite color={notColor} style={{ marginRight: 10 }} />
+            ) : (
+              <Chat color={notColor} style={{ marginRight: 10 }} />
+            );
+          return (
+            <MenuItem onClick={this.handleClose} key={not.createdAt}>
+              {notIcon}
+              <Typography
+                component={Link}
+                to={`/users/${not.receiver}/screams/${not.screamId}`}
+                variant="body2"
+              >
+                {not.sender} {verb} your scream {time}
+              </Typography>
+            </MenuItem>
           );
-        return (
-          <MenuItem onClick={this.handleClose} key={not.createdAt}>
-            {notIcon}
-            <Typography
-              component={Link}
-              to={`/users/${not.receiver}/screams/${not.screamId}`}
-              variant="body2"
-            >
-              {not.sender} {verb} your scream {time}
-            </Typography>
-          </MenuItem>
-        );
-      }))
-    ) : (
-      <MenuItem>You have no notifications</MenuItem>
-    );
+        }))
+      : (notificationItems = <MenuItem>You have no notifications</MenuItem>);
 
     if (notifications && unreadNotifications > 0) {
       notificationsIcon = (

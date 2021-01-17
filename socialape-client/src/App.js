@@ -28,6 +28,8 @@ import { getUserData } from "./redux/actions/userActions";
 
 const theme = createMuiTheme(themeFile);
 
+axios.defaults.baseURL =
+  "https://us-central1-socialape-acee4.cloudfunctions.net/api";
 let token = localStorage.FBIdToken;
 if (token) {
   var decoded = jwt_decode(token);
